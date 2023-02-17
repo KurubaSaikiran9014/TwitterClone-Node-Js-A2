@@ -1,305 +1,534 @@
-# TwitterClone-Node-Js-A2
+# Twitter
 
-Twitter
-Twitter
-Given an app.js file and a database file twitterClone.db consisting of five tables user, follower, tweet, reply, and like.
+Given an `app.js` file and a database file `twitterClone.db` consisting of five tables `user`, `follower`, `tweet`, `reply`, and `like`.
 
-Write APIs to perform operations on the tables user, follower, tweet, reply, and like containing the following columns,
+Write APIs to perform operations on the tables `user`, `follower`, `tweet`, `reply`, and `like` containing the following columns,
 
-User Table
+**User Table**
 
-Column	Type
-user_id	INTEGER
-name	TEXT
-username	TEXT
-password	TEXT
-gender	TEXT
-Follower Table
+| Column   | Type    |
+| -------- | ------- |
+| user_id  | INTEGER |
+| name     | TEXT    |
+| username | TEXT    |
+| password | TEXT    |
+| gender   | TEXT    |
 
-Column	Type
-follower_id	INTEGER
-follower_user_id	INTEGER
-following_user_id	INTEGER
+**Follower Table**
+
+| Column              | Type    |
+| ------------------- | ------- |
+| `follower_id`       | INTEGER |
+| `follower_user_id`  | INTEGER |
+| `following_user_id` | INTEGER |
+
 Here, if user1 follows user2 then,
 
-follower_user_id is the user ID of user1 and following_user_id is the user ID of user2.
+`follower_user_id` is the user ID of user1 and `following_user_id` is the user ID of user2.
 
-Tweet Table
+**Tweet Table**
 
-Column	Type
-tweet_id	INTEGER
-tweet	TEXT
-user_id	INTEGER
-date_time	DATETIME
-Reply Table
+| Column    | Type     |
+| --------- | -------- |
+| tweet_id  | INTEGER  |
+| tweet     | TEXT     |
+| user_id   | INTEGER  |
+| date_time | DATETIME |
 
-Column	Type
-reply_id	INTEGER
-tweet_id	INTEGER
-reply	TEXT
-user_id	INTEGER
-date_time	DATETIME
-Like Table
+**Reply Table**
 
-Column	Type
-like_id	INTEGER
-tweet_id	INTEGER
-user_id	INTEGER
-date_time	DATETIME
-Sample Valid User Credentials
-API 1
-API 2
-Authentication with JWT Token
-API 3
-API 4
-API 5
-API 6
-API 7
-API 8
-API 9
-API 10
-API 11
-API 1
-Path: /register/
-Method: POST
-Request
+| Column    | Type     |
+| --------- | -------- |
+| reply_id  | INTEGER  |
+| tweet_id  | INTEGER  |
+| reply     | TEXT     |
+| user_id   | INTEGER  |
+| date_time | DATETIME |
 
-Scenario 1
+**Like Table**
 
-Description:
+| Column    | Type     |
+| --------- | -------- |
+| like_id   | INTEGER  |
+| tweet_id  | INTEGER  |
+| user_id   | INTEGER  |
+| date_time | DATETIME |
 
-If the username already exists
+#### Sample Valid User Credentials
 
-Response
-Status code
-400
-Body
-User already exists
+```
+{
+  "username":"JoeBiden",
+  "password":"biden@123"
+}
+```
 
-Scenario 2
+<Section id="section1" >
 
-Description:
+### API 1
 
-If the registrant provides a password with less than 6 characters
+#### Path: `/register/`
 
-Response
-Status code
-400
-Body
-Password is too short
+#### Method: `POST`
 
-Scenario 3
+**Request**
 
-Description:
+```
+{
+  "username": "adam_richard",
+  "password": "richard_567",
+  "name": "Adam Richard",
+  "gender": "male"
+}
+```
 
-Successful registration of the registrant
+- **Scenario 1**
 
-Response
+  - **Description**:
 
-Status code
+    If the username already exists
 
-Body
-User created successfully
+  - **Response**
+    - **Status code**
+      ```
+      400
+      ```
+    - **Body**
+      ```
+      User already exists
+      ```
 
-API 2
-Path: /login/
-Method: POST
-Request
+- **Scenario 2**
 
-Scenario 1
+  - **Description**:
 
-Description:
+    If the registrant provides a password with less than 6 characters
 
-If the user doesn't have a Twitter account
+  - **Response**
+    - **Status code**
+      ```
+      400
+      ```
+    - **Body**
+      ```
+      Password is too short
+      ```
 
-Response
-Status code
-400
-Body
-Invalid user
+- **Scenario 3**
 
-Scenario 2
+  - **Description**:
 
-Description:
+    Successful registration of the registrant
 
-If the user provides an incorrect password
+  - **Response**
 
-Response
-Status code
-400
-Body
-Invalid password
+    - **Status code**
 
-Scenario 3
+      ```
+      200
+      ```
 
-Description:
+    - **Body**
+      ```
+      User created successfully
+      ```
 
-Successful login of the user
+</Section>
 
-Response
+<Section id="section2">
 
-Return the JWT Token
+### API 2
 
-Authentication with JWT Token
+#### Path: `/login/`
+
+#### Method: `POST`
+
+**Request**
+
+```
+{
+  "username":"JoeBiden",
+  "password":"biden@123"
+}
+```
+
+- **Scenario 1**
+
+  - **Description**:
+
+    If the user doesn't have a Twitter account
+
+  - **Response**
+    - **Status code**
+      ```
+      400
+      ```
+    - **Body**
+      ```
+      Invalid user
+      ```
+
+- **Scenario 2**
+
+  - **Description**:
+
+    If the user provides an incorrect password
+
+  - **Response**
+    - **Status code**
+      ```
+      400
+      ```
+    - **Body**
+      ```
+      Invalid password
+      ```
+
+- **Scenario 3**
+
+  - **Description**:
+
+    Successful login of the user
+
+  - **Response**
+
+    Return the JWT Token
+
+    ```
+    {
+      "jwtToken": "ak2284ns8Di32......"
+    }
+    ```
+
+</Section>
+
+<Section id="authToken">
+
+### Authentication with JWT Token
+
 Write a middleware to authenticate the JWT token.
 
-Scenario 1
+- **Scenario 1**
 
-Description:
+  - **Description**:
 
-If the JWT token is not provided by the user or an invalid JWT token is provided
+    If the JWT token is not provided by the user or an invalid JWT token is provided
 
-Response
-Status code
-401
-Body
-Invalid JWT Token
+  - **Response**
+    - **Status code**
+      ```
+      401
+      ```
+    - **Body**
+      ```
+      Invalid JWT Token
+      ```
 
-Scenario 2
-After successful verification of JWT token, proceed to next middleware or handler
+- **Scenario 2**
+  - After successful verification of JWT token, proceed to next middleware or handler
 
-API 3
-Path: /user/tweets/feed/
-Method: GET
-Description:
+</Section>
+
+<Section id="section3">
+
+### API 3
+
+#### Path: `/user/tweets/feed/`
+
+#### Method: `GET`
+
+#### Description:
+
 Returns the latest tweets of people whom the user follows. Return 4 tweets at a time
 
-Response
- 
-API 4
-Path: /user/following/
-Method: GET
-Description:
+#### Response
+
+```
+ [
+   {
+      username: "SrBachchan",
+      tweet: "T 3859 - do something wonderful, people may imitate it ..",
+      dateTime: "2021-04-07 14:50:19"
+   },
+   ...
+ ]
+```
+
+</Section>
+
+<Section id="section4">
+
+### API 4
+
+#### Path: `/user/following/`
+
+#### Method: `GET`
+
+#### Description:
+
 Returns the list of all names of people whom the user follows
 
-Response
-API 5
-Path: /user/followers/
-Method: GET
-Description:
+#### Response
+
+```
+[
+  {
+    "name": "Narendra Modi"
+  },
+  ...
+]
+```
+
+</Section>
+
+<Section id="section5">
+
+### API 5
+
+#### Path: `/user/followers/`
+
+#### Method: `GET`
+
+#### Description:
+
 Returns the list of all names of people who follows the user
 
-Response
-API 6
-Path: /tweets/:tweetId/
-Method: GET
-Scenario 1
+#### Response
 
-Description:
+```
+[
+  {
+    "name": "Narendra Modi"
+  },
+  ...
+]
+```
 
-If the user requests a tweet other than the users he is following
+</Section>
 
-Response
-Status code
-401
-Body
-Invalid Request
+<Section id="section6">
 
-Scenario 2
+### API 6
 
-Description:
+#### Path: `/tweets/:tweetId/`
 
-If the user requests a tweet of the user he is following, return the tweet, likes count, replies count and date-time
+#### Method: `GET`
 
-Response
-{
-   "tweet": "T 3859 - do something wonderful, people may imitate it ..",
-   "likes": 3,
-   "replies": 1,
-   "dateTime": "2021-04-07 14:50:19"
-}
+- **Scenario 1**
 
-API 7
-Path: /tweets/:tweetId/likes/
-Method: GET
-Scenario 1
+  - **Description**:
 
-Description:
+    If the user requests a tweet other than the users he is following
 
-If the user requests a tweet other than the users he is following
+  - **Response**
+    - **Status code**
+      ```
+      401
+      ```
+    - **Body**
+      ```
+      Invalid Request
+      ```
 
-Response
-Status code
-401
-Body
-Invalid Request
+- **Scenario 2**
 
-Scenario 2
+  - **Description**:
 
-Description:
+    If the user requests a tweet of the user he is following, return the tweet, likes count, replies count and date-time
 
-If the user requests a tweet of a user he is following, return the list of usernames who liked the tweet
+  - **Response**
+    ```
+    {
+       "tweet": "T 3859 - do something wonderful, people may imitate it ..",
+       "likes": 3,
+       "replies": 1,
+       "dateTime": "2021-04-07 14:50:19"
+    }
+    ```
 
-Response
-{
-   "likes": ["albert", ]
-}
+</Section>
 
-API 8
-Path: /tweets/:tweetId/replies/
-Method: GET
-Scenario 1
+<Section id="section7">
 
-Description:
+### API 7
 
-If the user requests a tweet other than the users he is following
+#### Path: `/tweets/:tweetId/likes/`
 
-Response
-Status code
-401
-Body
-Invalid Request
+#### Method: `GET`
 
-Scenario 2
+- **Scenario 1**
 
-Description:
+  - **Description**:
 
-If the user requests a tweet of a user he is following, return the list of replies.
+    If the user requests a tweet other than the users he is following
 
-Response
+  - **Response**
+    - **Status code**
+      ```
+      401
+      ```
+    - **Body**
+      ```
+      Invalid Request
+      ```
 
-API 9
-Path: /user/tweets/
-Method: GET
-Description:
+- **Scenario 2**
+
+  - **Description**:
+
+    If the user requests a tweet of a user he is following, return the list of usernames who liked the tweet
+
+  - **Response**
+    ```
+    {
+       "likes": ["albert", ]
+    }
+    ```
+
+</Section>
+
+<Section id="section8">
+
+### API 8
+
+#### Path: `/tweets/:tweetId/replies/`
+
+#### Method: `GET`
+
+- **Scenario 1**
+
+  - **Description**:
+
+    If the user requests a tweet other than the users he is following
+
+  - **Response**
+    - **Status code**
+      ```
+      401
+      ```
+    - **Body**
+      ```
+      Invalid Request
+      ```
+
+- **Scenario 2**
+
+  - **Description**:
+
+    If the user requests a tweet of a user he is following, return the list of replies.
+
+  - **Response**
+
+        ```
+        {
+           "replies": [
+             {
+               "name": "Narendra Modi",
+               "reply": "When you see it.."
+              },
+            ...]
+        }
+        ```
+
+    </Section>
+
+<Section id="section9">
+
+### API 9
+
+#### Path: `/user/tweets/`
+
+#### Method: `GET`
+
+#### Description:
+
 Returns a list of all tweets of the user
 
-Response
-API 10
-Path: /user/tweets/
-Method: POST
-Description:
+#### Response
+
+```
+[
+  {
+    "tweet": "Ready to don the Blue and Gold",
+    "likes": 3,
+    "replies": 4,
+    "dateTime": "2021-4-3 08:32:44"
+  },
+  ...
+]
+```
+
+</Section>
+
+<Section id="section10">
+
+### API 10
+
+#### Path: `/user/tweets/`
+
+#### Method: `POST`
+
+#### Description:
+
 Create a tweet in the tweet table
 
-Request
-Response
-API 11
-Path: /tweets/:tweetId/
-Method: DELETE
-Scenario 1
+#### Request
 
-Description:
+```
+{
+   "tweet": "The Mornings..."
+}
+```
 
-If the user requests to delete a tweet of other users
+#### Response
 
-Response
-Status code
-401
-Body
-Invalid Request
+```
+Created a Tweet
+```
 
-Scenario 2
+</Section>
 
-Description:
+<Section id="section11">
 
-If the user deletes his tweet
+### API 11
 
-Response
-Tweet Removed
+#### Path: `/tweets/:tweetId/`
 
+#### Method: `DELETE`
 
-Use npm install to install the packages.
+- **Scenario 1**
 
-Export the express instance using the default export syntax.
+  - **Description**:
 
-Use Common JS module syntax.
+    If the user requests to delete a tweet of other users
+
+  - **Response**
+    - **Status code**
+      ```
+      401
+      ```
+    - **Body**
+      ```
+      Invalid Request
+      ```
+
+- **Scenario 2**
+
+  - **Description**:
+
+    If the user deletes his tweet
+
+  - **Response**
+    ```
+    Tweet Removed
+    ```
+
+</Section>
+
+<br/>
+
+Use `npm install` to install the packages.
+
+**Export the express instance using the default export syntax.**
+
+**Use Common JS module syntax.**
